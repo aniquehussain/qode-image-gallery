@@ -88,18 +88,15 @@ export default function Home() {
                 loading="lazy"
                 alt="background image"
               />
-
               {/* Comment */}
               <div
                 className="cursor-pointer absolute bottom-1 left-1 bg-white px-2 py-0.5 rounded-md opacity-60 hover:opacity-100"
                 onClick={() => setImageModalDetails(img)}
               >
-
                 <ChatIcon className="duration-300" />
               </div>
               {/* Download */}
               <div className="cursor-pointer absolute bottom-1 left-10 bg-white px-2 py-0.5 rounded-md opacity-60 hover:opacity-100">
-
                 <a href="#" onClick={() => handleDownload(img.imageUrl)}>
                   <DownloadIcon className="duration-300" />
                 </a>
@@ -108,7 +105,17 @@ export default function Home() {
           ))}
         </div>
       </div>
+      {images.length === 0 && (
+        <div className="flex mx-auto justify-center items-center">
+          <p className="text-xl font-light text-gray-500 text-center my-10">
 
+            No images uploaded yet, <br/>Click on the upload button to upload an
+            image
+          </p>
+          <p></p>
+        </div>
+      )}
+      {/* Upload Image */}
       <ImageUpload
         onOpen={onOpen}
         isOpen={isOpen}
