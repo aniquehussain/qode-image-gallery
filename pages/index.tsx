@@ -70,7 +70,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="flex before:rounded-full before:bg-gradient-radial before:from-white after:blur-2xl mt-4">
+      <div className="flex before:rounded-full before:bg-gradient-radial before:from-white after:blur-2xl mt-6 sm:mt-2">
         <div className=" mx-auto container mb-2 columns-2 sm:columns-2 lg:columns-3 gap-x-1 gap-y-1 pb-2">
           {images.map((img) => (
             <div key={img.imageId} className="relative mb-1">
