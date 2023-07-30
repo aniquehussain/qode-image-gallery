@@ -36,6 +36,7 @@ function ImageUpload({
       const allowedExtensions = ["jpg", "jpeg", "png"];
       const fileExtension = image.name.split(".").pop()?.toLowerCase() || "";
       if (!allowedExtensions.includes(fileExtension)) {
+           onClose();
         setSelectedImage(null);
         fileInputRef.current!.value = "";
         setResponseMessage({
@@ -50,6 +51,7 @@ function ImageUpload({
       const maximumFileSizeInMB = 5;
       const maximumFileSizeInBytes = maximumFileSizeInMB * 1024 * 1024;
       if (image.size > maximumFileSizeInBytes) {
+           onClose();
         setSelectedImage(null);
         fileInputRef.current!.value = "";
         setResponseMessage({
@@ -68,6 +70,7 @@ function ImageUpload({
   const onImageUpload = async () => {
     // Check if an image is selected
     if (!selectedImage) {
+         onClose();
       setResponseMessage({
         status: "error",
         message: "Please select an image to upload.",
@@ -125,19 +128,21 @@ function ImageUpload({
         );
 
         // Display the response message
-        onClose();
+
         setResponseMessage({
           status: addImageDetailsToDb?.data?.status,
           message: addImageDetailsToDb?.data?.message,
         });
         setImages([...images, addImageDetailsToDb?.data?.data]);
       } else {
+
         setResponseMessage({
           status: "error",
           message: "Something went wrong. Please try again.",
         });
       }
     } catch (error) {
+
       setSelectedImage(null);
       fileInputRef.current!.value = "";
       setResponseMessage({
@@ -146,6 +151,7 @@ function ImageUpload({
       });
       //   alert("Something went wrong. Please try again.");
     } finally {
+         onClose();
       // Reset the state variables
       setUploadProgress(0);
       setSelectedImage(null);
