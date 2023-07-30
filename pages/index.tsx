@@ -108,7 +108,7 @@ export default function Home() {
         <div className="flex mx-auto justify-center items-center">
           <p className="text-xl font-light text-gray-500 text-center my-10">
 
-            No images uploaded yet, <br/>Click on the upload button to upload an
+            Loading.... <br/>Click on the upload button to upload an
             image
           </p>
           <p></p>

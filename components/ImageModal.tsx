@@ -106,7 +106,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
     >
       <div className="bg-opacity-80 backdrop-filter backdrop-blur-md bg-white p-8 rounded-lg shadow-lg w-11/12 md:w-1/2 xl:w-1/2 gap-4 sm:flex">
         {/* Image on the Left */}
-        <div className="sm:w-1/2 h-44 flex-shrink-0 relative">
+        <div className="sm:w-1/2 h-44 sm:h-96 flex-shrink-0 relative">
           <div className="w-full h-full">
             <Image
               src={imageModalDetails.imageUrl}
@@ -122,12 +122,13 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
               alt="background image"
             />
           </div>
+
         </div>
         {/* Comment Section on the Right */}
-        <div className="flex flex-col space-y-2 sm:w-1/2 pr-4">
+        <div className="flex flex-col space-y-2 sm:w-1/2">
           <p className="text-lg font-bold text-center mt-2 sm:mt-0">Comments</p>
           {/* Display existing comments */}
-          <div className="overflow-y-scroll max-h-48 sm:h-72 scroll-">
+          <div className="overflow-y-scroll max-h-[12.7rem] sm:h-72 ">
             {comments?.map((comment, index) => (
               <div key={index} className="flex">
                 <div
@@ -148,7 +149,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
               </div>
             )}
           </div>
-          <div className="sm:hidden">
+          <div className="">
             {/* Input field for adding new comments */}
             <Textarea
               borderRadius={7}
