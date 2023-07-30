@@ -35,12 +35,30 @@ export default function Home() {
     fetchImages();
   }, []);
 
+  // Function to handle the image upload
+  const handleDownload = async (imageUrl) => {
+    try {
+      const response = await axios.get(imageUrl, { responseType: "blob" });
+      const blob = new Blob([response.data]);
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+
+      // Adding date to filename to make it unique
+      a.download = `${new Date().valueOf()}_image.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+    }
+  };
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <main className="flex min-h-screen flex-col mx-0 pt-20 sm:mx-20 md:mx-24 sm:pt-10 md:pt-10 xl:p-10">
       <div className="z-10 items-center justify-between text-base font-medium font-mono  lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-100 lg:p-4 ">
-
           <Button
             className="sticky top-0 right-0 z-10"
             colorScheme="facebook"
@@ -70,16 +88,21 @@ export default function Home() {
                 loading="lazy"
                 alt="background image"
               />
+
+              {/* Comment */}
               <div
                 className="cursor-pointer absolute bottom-1 left-1 bg-white px-2 py-0.5 rounded-md opacity-60 hover:opacity-100"
                 onClick={() => setImageModalDetails(img)}
               >
-                {/* Add the icon here */}
+
                 <ChatIcon className="duration-300" />
               </div>
+              {/* Download */}
               <div className="cursor-pointer absolute bottom-1 left-10 bg-white px-2 py-0.5 rounded-md opacity-60 hover:opacity-100">
-                {/* Add the icon here */}
-                <DownloadIcon className="duration-300" />
+
+                <a href="#" onClick={() => handleDownload(img.imageUrl)}>
+                  <DownloadIcon className="duration-300" />
+                </a>
               </div>
             </div>
           ))}

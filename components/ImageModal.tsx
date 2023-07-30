@@ -23,11 +23,14 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
 
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // Saving the comments sorted by date in a local state
   const [comments, setComments] = useState(
-    imageModalDetails?.comments?.length ? imageModalDetails?.comments?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(
+    imageModalDetails?.comments?.length ? imageModalDetails?.comments?.sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()).map(
       (comment) => comment.comment
     ):[]
   );
+  // State to store the new comment
   const [newComment, setNewComment] = useState("");
 
   // Define an array of background colors
@@ -70,10 +73,11 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
     setTimeout(onClose, 300); // Wait for the fade-out animation to complete before invoking onClose
   };
 
+  // Function to add a new comment
   const handleAddComment = async () => {
     if (newComment.trim() !== "") {
       try {
-        // Send the new comment to the backend API
+        // Send the new comment to the mongodb database
         const response = await axios.patch(
           "/api/imageHandler",
           {
