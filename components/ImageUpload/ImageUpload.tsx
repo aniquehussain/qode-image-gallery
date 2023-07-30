@@ -3,20 +3,16 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
-  useDisclosure,
-  Text,
 } from "@chakra-ui/react";
 import axios, { AxiosResponse } from "axios";
 import { v4 } from "uuid";
 
 function ImageUpload({
   isOpen,
-  onOpen,
   onClose,
   setResponseMessage,
   setImages,
@@ -37,7 +33,7 @@ function ImageUpload({
 
       // ---------------Data validation start----------------------------- //
       // Check if the uploaded file is an image
-      const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+      const allowedExtensions = ["jpg", "jpeg", "png"];
       const fileExtension = image.name.split(".").pop()?.toLowerCase() || "";
       if (!allowedExtensions.includes(fileExtension)) {
         setSelectedImage(null);
@@ -194,7 +190,7 @@ function ImageUpload({
                   ref={fileInputRef}
                   className="rounded-lg bg-gray-200 opacity-50 test-sm  duration-300 file:px-2 file:py-1 file:rounded-lg file:bg-gray-900 file:text-white file:opacity-100 file:hover:bg-gray-600 file:duration-300 file:cursor-pointer"
                   type="file"
-                  accept=".jpg, .jpeg, .png, .gif"
+                  accept=".jpg, .jpeg, .png"
                   onChange={onImageChange}
                 />
               </div>

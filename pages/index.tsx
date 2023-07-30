@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import Dialog from "@/components/Dialog/Dialog";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import axios from "axios";
-import { ChatIcon, DownloadIcon, LinkIcon } from "@chakra-ui/icons";
+import { ChatIcon, DownloadIcon} from "@chakra-ui/icons";
 import ImageModal from "@/components/ImageModal";
 
 export default function Home() {
+
+  // State to store the response message from the API
   const [responseMessage, setResponseMessage] = useState({
     status: "",
     message: "",
   });
-
-  const [showImageModal, setShowImageModal] = useState(false);
   const [imageModalDetails, setImageModalDetails] = useState(null)
-
   // State to store the fetched images
   const [images, setImages] = useState([]);
   // Function to fetch all images from the API
@@ -117,7 +116,6 @@ export default function Home() {
       )}
       {/* Upload Image */}
       <ImageUpload
-        onOpen={onOpen}
         isOpen={isOpen}
         onClose={onClose}
         setResponseMessage={setResponseMessage}
