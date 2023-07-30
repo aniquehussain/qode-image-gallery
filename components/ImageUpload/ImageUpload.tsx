@@ -41,7 +41,7 @@ function ImageUpload({
         fileInputRef.current!.value = "";
         setResponseMessage({
           status: "error",
-          message: "Please upload a valid image file (jpg, jpeg, png, gif).",
+          message: "Please upload a valid image file (jpg, jpeg, png).",
         });
 
         return;
