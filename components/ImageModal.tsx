@@ -105,47 +105,25 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
       }`}
     >
       <div className="bg-opacity-80 backdrop-filter backdrop-blur-md bg-white p-8 rounded-lg shadow-lg w-11/12 md:w-1/2 xl:w-1/2 gap-4 sm:flex">
-        {/* Image on the Right */}
-        <div className="sm:w-1/2">
-          <Image
-            src={imageModalDetails.imageUrl}
-            className="hover:opacity-70 duration-300 hover:cursor-pointer rounded-lg"
-            height={0}
-            width={500}
-            placeholder="blur"
-            blurDataURL={
-              "https://res.cloudinary.com/deswjevcm/image/upload/v1690719541/ujpqclrinhkfdncnsfb2.jpg"
-            }
-            loading="lazy"
-            alt="background image"
-          />
-          <div className="hidden sm:block">
-            <Textarea
-              borderRadius={7}
-              borderColor="gray.400" // Set border color to dark gray
-              color="gray.900" // Set text color to dark gray
-              className="mt-2 h-20 out"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Add your comment here..."
-              size="md"
-              resize={"none"}
+        {/* Image on the Left */}
+        <div className="sm:w-1/2 h-44 flex-shrink-0 relative">
+          <div className="w-full h-full">
+            <Image
+              src={imageModalDetails.imageUrl}
+              className="hover:opacity-70 duration-300 hover:cursor-pointer rounded-lg"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+              placeholder="blur"
+              blurDataURL={
+                "https://res.cloudinary.com/deswjevcm/image/upload/v1690719541/ujpqclrinhkfdncnsfb2.jpg"
+              }
+              loading="lazy"
+              alt="background image"
             />
-
-            {/* Button to submit the new comment */}
-            <Button
-              width={"full"}
-              className="mt-2"
-              colorScheme="teal"
-              variant="solid"
-              size="md"
-              onClick={handleAddComment}
-            >
-              Add Comment
-            </Button>
           </div>
         </div>
-        {/* Comment Section on the Left */}
+        {/* Comment Section on the Right */}
         <div className="flex flex-col space-y-2 sm:w-1/2 pr-4">
           <p className="text-lg font-bold text-center mt-2 sm:mt-0">Comments</p>
           {/* Display existing comments */}
@@ -157,19 +135,21 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
                 >
                   {randomCharacter}
                 </div>
-                <div className="text-xs p-2 shadow-sm bg-gray-100 rounded-tl-none  rounded-lg mt-3 my-1 ">
+                <div className="text-xs p-2 shadow-sm bg-gray-100 rounded-tl-none rounded-lg mt-3 my-1">
                   <p className="font-semibold mb-2">Anonymous</p>
                   {comment}
                 </div>
               </div>
             ))}
-
             {/* Display a message if there are no comments */}
             {comments?.length === 0 && (
-              <div className="text-center text-gray-400">No comments yet, add your first comment</div>
+              <div className="text-center text-gray-400">
+                No comments yet, add your first comment
+              </div>
             )}
           </div>
-          <div className=" sm:hidden">
+          <div className="sm:hidden">
+            {/* Input field for adding new comments */}
             <Textarea
               borderRadius={7}
               borderColor="gray.400" // Set border color to dark gray
@@ -181,7 +161,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
               size="sm"
               resize={"none"}
             />
-
             {/* Button to submit the new comment */}
             <Button
               width="full"
@@ -195,7 +174,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageModalDetails, onClose }) =
             </Button>
           </div>
         </div>
-
         {/* Cross Button (Close Button) */}
         <button
           className="absolute top-2 right-2 px-2 py-1 rounded-full"
